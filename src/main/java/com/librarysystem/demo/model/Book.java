@@ -1,34 +1,24 @@
 package com.librarysystem.demo.model;
 
-import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
+    
+    @Id
+    @GeneratedValue
+    private Integer id;
+    
     private String bookName;
     private String authorName;
-    private UUID id;
-
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public UUID getBookId() {
-        return id;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+   
 }
