@@ -32,7 +32,7 @@ public class UserRepository {
         return user;
     }
 
-    public static User loginUser(String username, String bookname) throws SQLException {
+    public static User loginUser(String username, String password) throws SQLException {
         connection = DatabaseConfig.makeConnection();
         if (connection != null) {
             String query = "select * from users where password = ?";
