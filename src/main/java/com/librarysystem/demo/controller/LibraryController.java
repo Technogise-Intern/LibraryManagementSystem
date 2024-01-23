@@ -1,31 +1,36 @@
 package com.librarysystem.demo.controller;
 
-import java.awt.print.Book;
-import java.sql.SQLException;
+import com.librarysystem.demo.model.Book;
+import com.librarysystem.demo.service.LibraryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-import com.librarysystem.demo.model.User;
-import com.librarysystem.demo.service.UserService;
-
+@RestController
+@RequestMapping("/library")
 public class LibraryController {
 
+    @Autowired
+    private LibraryService libraryService;
 
-    UserService userService = new UserService();
-
-
-    public static void viewBooks() throws SQLException {
-        List<Book> books = UserService.viewBooks();
+    @GetMapping("/books")
+    public ResponseEntity<List<Book>> viewBooks() {
+        List<Book> books = libraryService.viewBooks();
+        return ResponseEntity.ok(books);
     }
 
-    public Book borrowBook(String bookname) {
-        return null;
+    @PostMapping("/save-book")
+    public ResponseEntity<Book> saveBook(@RequestBody Book book) {
+        Book savedBook = libraryService.saveBook(book);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
-
-    public static Book saveBook(String bookname, String authorname) throws SQLException {
-        Book book = new Book();
-
-        return book;
+    @PostMapping("/books/{bookname}/borrow")
+    public ResponseEntity<Book> borrowBook(@PathVariable String bookname) {
+        Book borrowedBook = libraryService.borrowBook(bookname);
+        return ResponseEntity.ok(borrowedBook);
     }
-
 }
