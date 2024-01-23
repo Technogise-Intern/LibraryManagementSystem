@@ -10,7 +10,7 @@ public class User {
     private String password;
     private UUID id;
 
-    public List<Book> borrowedBooks = new ArrayList<>();
+    private List<Book> borrowedBooks = new ArrayList<>();
 
     public String getPassword() {
         return password;

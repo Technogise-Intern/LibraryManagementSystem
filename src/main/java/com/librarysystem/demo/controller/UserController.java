@@ -27,7 +27,7 @@ public class UserController {
         user.setUsername(usernname);
         user.setPassword(password);
 
-        String userToken = UserService.loginUser(user);
+        String userToken = UserService.loginUser(usernname, password);
         return userToken;
     }
 

@@ -13,6 +13,8 @@ import java.util.UUID;
 public class UserRepository {
     static Connection connection;
 
+    private static User user;
+
     public static User create(User user) throws SQLException {
         connection = DatabaseConfig.makeConnection();
 
@@ -30,13 +32,8 @@ public class UserRepository {
         return user;
     }
 
-    public static String login(User user) throws SQLException {
+    public static User loginUser(String username, String bookname) throws SQLException {
         connection = DatabaseConfig.makeConnection();
-
-        String token = "";
-        String secretKey = "yourSecretKey";
-        long expirationTimeMillis = System.currentTimeMillis() + 3600000;
-
         if (connection != null) {
             String query = "select * from users where password = ?";
 
@@ -46,19 +43,15 @@ public class UserRepository {
             ResultSet resultSet = loginStatement.executeQuery();
 
             if (resultSet.next()) {
-
-                System.out.println("Generated JWT: " + token);
-
-                System.out.println(resultSet.getString("username"));
-                System.out.println(user.getUsername() + " Logged in");
+                user.setUsername(resultSet.getString("username"));
             } else {
-                System.out.println("Invalid credentials");
+                return null;
             }
 
         } else {
             System.out.println("Something went wrong!");
         }
-        return token;
+        return user;
     }
 
     public static List<Book> getUserBooks(User user) {
