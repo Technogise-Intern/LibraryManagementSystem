@@ -22,7 +22,7 @@ public class UserService {
     private final static String secretKey = "yourSecretKey";
     private static long expirationTimeMillis = System.currentTimeMillis() + 3600000;
 
-    
+
     public static void createUser(User user) {
         try {
             UserRepository.create(user);
@@ -31,8 +31,8 @@ public class UserService {
         }
     }
 
-    public static String loginUser(String username, String bookname) throws SQLException {
-        user = UserRepository.loginUser(username, bookname);
+    public static String loginUser(String username, String password) throws SQLException {
+        user = UserRepository.loginUser(username, password);
         return generateJWTToken();
     }
 
