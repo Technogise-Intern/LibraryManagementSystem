@@ -54,7 +54,4 @@ public class UserRepository {
         return user;
     }
 
-    public static List<Book> getUserBooks(User user) {
-        return user.borrowedBooks;
-    }
 }

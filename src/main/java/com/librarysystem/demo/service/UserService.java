@@ -22,37 +22,7 @@ public class UserService {
     private final static String secretKey = "yourSecretKey";
     private static long expirationTimeMillis = System.currentTimeMillis() + 3600000;
 
-    private List<User> users;
-
-    public UserService() {
-
-        users = new ArrayList<>();
-
-        User user = new User();
-        user.setUsername("Aditya");
-        user.setPassword("password");
-        user.setId(UUID.randomUUID());
-
-        users.add(user);
-    }
-
-    public User getUser(String username) {
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public void login(String username, String password) {
-        for (User user : users) {
-            if (user.getPassword().equals(password)) {
-
-            }
-        }
-    }
-
+    
     public static void createUser(User user) {
         try {
             UserRepository.create(user);
@@ -92,7 +62,6 @@ public class UserService {
     }
 
     public List<Book> getUserBooks(User user) {
-        // return UserRepository.getUserBooks(user);
         return null;
     }
 }
